@@ -16,7 +16,7 @@ def pickFrom(possibilities, picked):
 
 # Returns a list of items by opening the given file (filename given relative to 
 # directory of script) and reading items, splitting by lines
-def addIngredients(filename):
+def readFile(filename):
     dirname = os.path.dirname(os.path.realpath(__file__))
     filename = dirname + filename
     with open(filename) as ingredients:
@@ -27,12 +27,17 @@ def addIngredients(filename):
 MIN_INGRED = 2
 MAX_INGRED = 6
 
+# Randomize an awesome name
+names = readFile("/cities")
+print("Name: "  + names[random.randint(0, len(names)-1)])
+print("")
+
 # Load all basic ingredients
-ingredients = addIngredients("/vegetarian")
+ingredients = readFile("/vegetarian")
 
 # If specified on command line, load meat as well
 if "meat" in sys.argv :
-    ingredients = ingredients + addIngredients("/meat")
+    ingredients = ingredients + readFile("/meat")
 
 # The list to return
 roulette_result = []
@@ -48,7 +53,7 @@ for i in range(0, roulette_tries):
     pickFrom(ingredients, roulette_result)
 
 # Add as many sauces as sauces_nbr specified
-sauces = addIngredients("/sauce")
+sauces = readFile("/sauce")
 for i in range(0, sauces_nbr):
     pickFrom(sauces, roulette_result)
 
