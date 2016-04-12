@@ -11,6 +11,9 @@ class Pizza:
     def set_ingredents(self, ingredients):
         self.ingredients = ingredients
 
+    def get_ingredients(self):
+        return self.ingredients
+
 # Picks an element at random from 'possibilities' and add it to 'picked'. Keep 
 # trying to pick until an item that isn't already in picked appears, thereby
 # eliminating duplicates

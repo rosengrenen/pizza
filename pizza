@@ -7,5 +7,5 @@ pizza = random_pizza(sys.argv)
 
 print("Namn: " + pizza.name + "\n")
 
-for i in pizza.ingredients:
+for i in pizza.get_ingredients():
     print(i)
