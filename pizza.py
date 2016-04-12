@@ -38,7 +38,7 @@ def random_name():
     return names[random.randint(0, len(names)-1)]
 
 # Create a random pizza with specified number of ingredients, and optional arguments
-def random_pizza(args, min_ingred=2, max_ingred=6):
+def random_pizza(args=[], min_ingred=2, max_ingred=6):
     ret = Pizza(random_name())
 
     # Load all basic ingredients

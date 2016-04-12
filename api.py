@@ -27,7 +27,7 @@ def html_pizza(pizza):
 
 @app.route("/")
 def html_veg_pizza():
-    pizza = random_pizza([])
+    pizza = random_pizza()
     return html_pizza(pizza)
 
 @app.route("/meat")
@@ -37,7 +37,7 @@ def html_meat_pizza():
 
 @app.route("/json")
 def veg_pizza():
-    pizza = random_pizza([])
+    pizza = random_pizza()
     return json_pizza(pizza)
 
 @app.route("/json/meat")
