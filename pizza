@@ -5,7 +5,7 @@ import sys
 
 pizza = random_pizza(sys.argv)
 
-print(pizza.name + "\n")
+print("Namn: " + pizza.name + "\n")
 
 for i in pizza.ingredients:
     print(i)

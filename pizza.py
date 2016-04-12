@@ -32,7 +32,7 @@ def readFile(filename):
 # Randomize an awesome name
 def random_name():
     names = readFile("/cities")
-    return "Name: "  + names[random.randint(0, len(names)-1)]
+    return names[random.randint(0, len(names)-1)]
 
 def random_pizza(args):
     ret = Pizza(random_name())
