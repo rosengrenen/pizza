@@ -23,41 +23,46 @@ def readFile(filename):
         ret = ingredients.read().splitlines()
     return ret
 
-# The max and minimum number of ingredients, not counting sauces
-MIN_INGRED = 2
-MAX_INGRED = 6
-
 # Randomize an awesome name
-names = readFile("/cities")
-print("Name: "  + names[random.randint(0, len(names)-1)])
-print("")
+def random_name():
+    names = readFile("/cities")
+    print("Name: "  + names[random.randint(0, len(names)-1)])
+    print("")
 
-# Load all basic ingredients
-ingredients = readFile("/vegetarian")
+def random_pizza(args):
+    # The max and minimum number of ingredients, not counting sauces
+    MIN_INGRED = 2
+    MAX_INGRED = 6
 
-# If specified on command line, load meat as well
-if "meat" in sys.argv :
-    ingredients = ingredients + readFile("/meat")
+    random_name()
 
-# The list to return
-roulette_result = []
+    # Load all basic ingredients
+    ingredients = readFile("/vegetarian")
 
-# The number of ingredients we will add
-roulette_tries = random.randint(MIN_INGRED,MAX_INGRED)
+    # If specified on command line, load meat as well
+    if "meat" in args :
+        ingredients = ingredients + readFile("/meat")
 
-# The number of sauces to put on the pizza
-sauces_nbr = random.randint(0,2)
+    # The list to return
+    roulette_result = []
 
-# Add as many ingredients as roulette_tries specified
-for i in range(0, roulette_tries):
-    pickFrom(ingredients, roulette_result)
+    # The number of ingredients we will add
+    roulette_tries = random.randint(MIN_INGRED,MAX_INGRED)
 
-# Add as many sauces as sauces_nbr specified
-sauces = readFile("/sauce")
-for i in range(0, sauces_nbr):
-    pickFrom(sauces, roulette_result)
+    # The number of sauces to put on the pizza
+    sauces_nbr = random.randint(0,2)
 
-# Print the results
-for string in roulette_result:
-    print(string)
+    # Add as many ingredients as roulette_tries specified
+    for i in range(0, roulette_tries):
+        pickFrom(ingredients, roulette_result)
 
+    # Add as many sauces as sauces_nbr specified
+    sauces = readFile("/sauce")
+    for i in range(0, sauces_nbr):
+        pickFrom(sauces, roulette_result)
+
+    # Print the results
+    for string in roulette_result:
+        print(string)
+
+random_pizza(sys.argv)
