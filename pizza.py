@@ -25,15 +25,14 @@ def readFile(filename):
 # Randomize an awesome name
 def random_name():
     names = readFile("/cities")
-    print("Name: "  + names[random.randint(0, len(names)-1)])
-    print("")
+    return "Name: "  + names[random.randint(0, len(names)-1)]
 
 def random_pizza(args):
+    ret = random_name() + "\n\n"
+
     # The max and minimum number of ingredients, not counting sauces
     MIN_INGRED = 2
     MAX_INGRED = 6
-
-    random_name()
 
     # Load all basic ingredients
     ingredients = readFile("/vegetarian")
@@ -46,6 +45,7 @@ def random_pizza(args):
     roulette_result = []
 
     # The number of ingredients we will add
+
     roulette_tries = random.randint(MIN_INGRED,MAX_INGRED)
 
     # The number of sauces to put on the pizza
@@ -62,4 +62,6 @@ def random_pizza(args):
 
     # Print the results
     for string in roulette_result:
-        print(string)
+        ret = ret + string + "\n"
+
+    return ret

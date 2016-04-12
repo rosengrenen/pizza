@@ -3,4 +3,4 @@
 from pizza import random_pizza
 import sys
 
-random_pizza(sys.argv)
+print random_pizza(sys.argv)
