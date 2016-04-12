@@ -3,4 +3,9 @@
 from pizza import random_pizza
 import sys
 
-print random_pizza(sys.argv)
+pizza = random_pizza(sys.argv)
+
+print(pizza.name + "\n")
+
+for i in pizza.ingredients:
+    print(i)

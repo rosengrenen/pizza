@@ -4,6 +4,13 @@ import os
 import codecs
 import random
 
+class Pizza:
+    def __init__(self, name):
+        self.name = name
+
+    def set_ingredents(self, ingredients):
+        self.ingredients = ingredients
+
 # Picks an element at random from 'possibilities' and add it to 'picked'. Keep 
 # trying to pick until an item that isn't already in picked appears, thereby
 # eliminating duplicates
@@ -28,7 +35,7 @@ def random_name():
     return "Name: "  + names[random.randint(0, len(names)-1)]
 
 def random_pizza(args):
-    ret = random_name() + "\n\n"
+    ret = Pizza(random_name())
 
     # The max and minimum number of ingredients, not counting sauces
     MIN_INGRED = 2
@@ -60,8 +67,6 @@ def random_pizza(args):
     for i in range(0, sauces_nbr):
         pickFrom(sauces, roulette_result)
 
-    # Print the results
-    for string in roulette_result:
-        ret = ret + string + "\n"
+    ret.set_ingredents(roulette_result)
 
     return ret
