@@ -37,15 +37,14 @@ def random_name():
     names = readFile("/cities")
     return names[random.randint(0, len(names)-1)]
 
+# Create a random pizza with specified number of ingredients, and optional arguments
 def random_pizza(args, min_ingred=2, max_ingred=6):
     ret = Pizza(random_name())
-
-    # The max and minimum number of ingredients, not counting sauces
 
     # Load all basic ingredients
     ingredients = readFile("/vegetarian")
 
-    # If specified on command line, load meat as well
+    # If specified on arguments, load meat as well
     if "meat" in args :
         ingredients = ingredients + readFile("/meat")
 
@@ -53,7 +52,6 @@ def random_pizza(args, min_ingred=2, max_ingred=6):
     roulette_result = []
 
     # The number of ingredients we will add
-
     roulette_tries = random.randint(min_ingred,max_ingred)
 
     # The number of sauces to put on the pizza

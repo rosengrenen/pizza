@@ -3,6 +3,7 @@
 from pizza import random_pizza
 import sys
 
+# Creata a random pizza, and send along the command line arguments
 pizza = random_pizza(sys.argv)
 
 print("Namn: " + pizza.name + "\n")

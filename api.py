@@ -3,6 +3,7 @@ from pizza import random_pizza
 
 app = Flask(__name__)
 
+# Render a Pizza python object as a json-formatted string
 def json_pizza(pizza):
     ret = "{"
     ret += "\"name\":\"" + pizza.name + "\", "
@@ -15,6 +16,7 @@ def json_pizza(pizza):
     ret += "}"
     return ret
 
+# Render a Pizza python object as a html-formatted string
 def html_pizza(pizza):
     ret = "<h1>Name: " + pizza.name + "</h1>"
     ret += "<ul>"
