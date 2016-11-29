@@ -28,7 +28,7 @@ def pickFrom(possibilities, picked):
 def readFile(filename):
     dirname = os.path.dirname(os.path.realpath(__file__))
     filename = dirname + filename
-    with open(filename) as ingredients:
+    with open(filename, encoding="utf-8") as ingredients:
         ret = ingredients.read().splitlines()
     return ret
 
