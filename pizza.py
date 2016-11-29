@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import os
-import codecs
 import random
 
 class Pizza:
@@ -28,8 +27,8 @@ def pickFrom(possibilities, picked):
 def readFile(filename):
     dirname = os.path.dirname(os.path.realpath(__file__))
     filename = dirname + filename
-    with open(filename, encoding="utf-8") as ingredients:
-        ret = ingredients.read().splitlines()
+    with open(filename, encoding="utf-8") as f:
+        ret = f.read().splitlines()
     return ret
 
 # Randomize an awesome name
