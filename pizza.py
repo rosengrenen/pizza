@@ -1,5 +1,12 @@
+from operator import itemgetter
+from pizzalist import pizzas
 import os
 import random
+
+
+correctPoints = 10
+needsPoints = -2
+extraIngPoints = -8
 
 class Pizza:
     def __init__(self, name):
@@ -66,3 +73,27 @@ def random_pizza(args=[], min_ingred=2, max_ingred=6):
     ret.set_ingredents(roulette_result)
 
     return ret
+
+def findClosestPizza(inPizza):
+	#ingredients = readFile("/vegetarian") + readFile("/meat") + readFile("/sauce")
+	pizzaIngredients = set(inPizza.get_ingredients())
+	lenPizza = len(pizzaIngredients)
+	resultQuad = []
+	correctIngr = {}
+	extraIngr = {}
+	stillMissing = {}
+	for k in pizzas:
+		tmpSet = set(pizzas.get(k))
+		lenTmp = len(tmpSet)
+		correctIngr = pizzaIngredients.intersection(tmpSet)
+		stillMissing = pizzaIngredients.difference(tmpSet)
+		extraIngr = tmpSet.difference(pizzaIngredients)
+		resultQuad.append((len(correctIngr)*correctPoints+len(extraIngr)*extraIngPoints+len(stillMissing)*needsPoints, k, extraIngr, stillMissing))
+	resultQuad.sort(reverse=True)
+	#print("Choose: " + str(resultQuad[0][1]) + " and swap: " + str(resultQuad[0][2]) + " for: " + str(resultQuad[0][3]))
+	#print(pizzaIngredients)
+	if resultQuad[0][0] > 0 :
+		ret = "POINTS: " + str(resultQuad[0][0]) + "   " + str(resultQuad[0][1]) + " utan: " + str(resultQuad[0][2]) + " plus: " + str(resultQuad[0][3])
+	else :
+		ret =  "Margharita plus: " + str(pizzaIngredients)
+	return ret
