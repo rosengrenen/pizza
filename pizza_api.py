@@ -1,5 +1,6 @@
 from flask import Flask
-from pizza import random_pizza
+from pizza import *
+import json
 
 app = Flask(__name__)
 
@@ -15,6 +16,9 @@ def json_pizza(pizza):
     ret += "]"
     ret += "}"
     return ret
+
+def json_pizza2(pizza):
+    return json.loads(findClosestPizza(pizza))
 
 # Render a Pizza python object as a html-formatted string
 def html_pizza(pizza):
@@ -38,7 +42,7 @@ def html_meat_pizza():
 @app.route("/json")
 def veg_pizza():
     pizza = random_pizza()
-    return json_pizza(pizza)
+    return json_pizza2(pizza)
 
 @app.route("/json/meat")
 def meat_pizza():

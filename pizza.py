@@ -75,7 +75,6 @@ def random_pizza(args=[], min_ingred=2, max_ingred=6):
     return ret
 
 def findClosestPizza(inPizza):
-	#ingredients = readFile("/vegetarian") + readFile("/meat") + readFile("/sauce")
 	pizzaIngredients = set(inPizza.get_ingredients())
 	lenPizza = len(pizzaIngredients)
 	resultQuad = []
@@ -90,10 +89,20 @@ def findClosestPizza(inPizza):
 		extraIngr = tmpSet.difference(pizzaIngredients)
 		resultQuad.append((len(correctIngr)*correctPoints+len(extraIngr)*extraIngPoints+len(stillMissing)*needsPoints, k, extraIngr, stillMissing))
 	resultQuad.sort(reverse=True)
-	#print("Choose: " + str(resultQuad[0][1]) + " and swap: " + str(resultQuad[0][2]) + " for: " + str(resultQuad[0][3]))
-	#print(pizzaIngredients)
 	if resultQuad[0][0] > 0 :
-		ret = "POINTS: " + str(resultQuad[0][0]) + "   " + str(resultQuad[0][1]) + " utan: " + str(resultQuad[0][2]) + " plus: " + str(resultQuad[0][3])
+		#ret = {resultQuad[0][0]: ''}
+		ret = '{"pizza_name": "' + str(resultQuad[0][1]) + '"'
+		if len(resultQuad[0][2]) != 0 :
+			#'{"first_name": "Guido", "last_name":"Rossum"}'
+			ret = ret + ', ' + '"remove:" [' + str(resultQuad[0][2]) + ']'
+		if len(resultQuad[0][3]) != 0 :
+			#ret.update(" plus: " + str(resultQuad[0][3])
+			ret = ret + ', ' + ' "add:" [' + str(resultQuad[0][3]) + ']'
+	
+
+
+
 	else :
-		ret =  "Margharita plus: " + str(pizzaIngredients)
-	return ret
+		#ret = {'Margharita':str(pizzaIngredients)}
+		ret =  '{"pizza_name": Margharita, "add": ['  + str(pizzaIngredients) + ']'
+	return ret + "}"
