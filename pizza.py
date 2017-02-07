@@ -75,7 +75,8 @@ def random_pizza(args=[], min_ingred=2, max_ingred=6):
     return ret
 
 def findClosestPizza(inPizza):
-	pizzaIngredients = set(inPizza.get_ingredients())
+	listPizza = inPizza.get_ingredients()
+	pizzaIngredients = set(listPizza)
 	lenPizza = len(pizzaIngredients)
 	resultQuad = []
 	correctIngr = {}
@@ -90,19 +91,16 @@ def findClosestPizza(inPizza):
 		resultQuad.append((len(correctIngr)*correctPoints+len(extraIngr)*extraIngPoints+len(stillMissing)*needsPoints, k, extraIngr, stillMissing))
 	resultQuad.sort(reverse=True)
 	if resultQuad[0][0] > 0 :
-		#ret = {resultQuad[0][0]: ''}
-		ret = '{"pizza_name": "' + str(resultQuad[0][1]) + '"'
+		ret = {'pizza_name':resultQuad[0][1]}
 		if len(resultQuad[0][2]) != 0 :
-			#'{"first_name": "Guido", "last_name":"Rossum"}'
-			ret = ret + ', ' + '"remove:" [' + str(resultQuad[0][2]) + ']'
+			ret['remove'] = list(resultQuad[0][2])
 		if len(resultQuad[0][3]) != 0 :
-			#ret.update(" plus: " + str(resultQuad[0][3])
-			ret = ret + ', ' + ' "add:" [' + str(resultQuad[0][3]) + ']'
+			ret['add'] = list(resultQuad[0][3])
 	
 
 
 
 	else :
 		#ret = {'Margharita':str(pizzaIngredients)}
-		ret =  '{"pizza_name": Margharita, "add": ['  + str(pizzaIngredients) + ']'
-	return ret + "}"
+		ret = {'pizza_name':"Margharita", 'add':listPizza} 
+	return ret

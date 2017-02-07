@@ -6,20 +6,12 @@ app = Flask(__name__)
 
 # Render a Pizza python object as a json-formatted string
 def json_pizza(pizza):
-    ret = "{"
-    ret += "\"name\":\"" + pizza.name + "\", "
-    ret += "\"ingredients\":["
-    ingredients = []
-    for i in pizza.get_ingredients():
-        ingredients.append("\"" + i + "\"")
-    ret += ", ".join(ingredients)
-    ret += "]"
-    ret += "}"
-    return ret
-
-def json_pizza2(pizza):
-    return json.loads(findClosestPizza(pizza))
-
+    ret = {
+        "name": pizza.name,
+        "ingredients": pizza.get_ingredients()
+    }
+    ret.update(findClosestPizza(pizza))
+    return json.dumps(ret)
 # Render a Pizza python object as a html-formatted string
 def html_pizza(pizza):
     ret = "<h1>Name: " + pizza.name + "</h1>"
@@ -42,7 +34,7 @@ def html_meat_pizza():
 @app.route("/json")
 def veg_pizza():
     pizza = random_pizza()
-    return json_pizza2(pizza)
+    return json_pizza(pizza)
 
 @app.route("/json/meat")
 def meat_pizza():
