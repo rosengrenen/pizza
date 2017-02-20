@@ -115,7 +115,6 @@ def findClosestPizza(inPizza):
     stillMissing = {}
     for k in pizzas:
         ingr = set(pizzas.get(k))
-        lenTmp = len(ingr)
         correctIngr = pizzaIngredients.intersection(ingr)
         stillMissing = pizzaIngredients.difference(ingr)
         extraIngr = ingr.difference(pizzaIngredients)
