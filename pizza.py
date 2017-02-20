@@ -75,32 +75,28 @@ def random_pizza(args=[], min_ingred=2, max_ingred=6):
     return ret
 
 def findClosestPizza(inPizza):
-	listPizza = inPizza.get_ingredients()
-	pizzaIngredients = set(listPizza)
-	lenPizza = len(pizzaIngredients)
-	resultQuad = []
-	correctIngr = {}
-	extraIngr = {}
-	stillMissing = {}
-	for k in pizzas:
-		tmpSet = set(pizzas.get(k))
-		lenTmp = len(tmpSet)
-		correctIngr = pizzaIngredients.intersection(tmpSet)
-		stillMissing = pizzaIngredients.difference(tmpSet)
-		extraIngr = tmpSet.difference(pizzaIngredients)
-		resultQuad.append((len(correctIngr)*correctPoints+len(extraIngr)*extraIngPoints+len(stillMissing)*needsPoints, k, extraIngr, stillMissing))
-	resultQuad.sort(reverse=True)
-	if resultQuad[0][0] > 0 :
-		ret = {'pizza_name':resultQuad[0][1]}
-		if len(resultQuad[0][2]) != 0 :
-			ret['remove'] = list(resultQuad[0][2])
-		if len(resultQuad[0][3]) != 0 :
-			ret['add'] = list(resultQuad[0][3])
-	
-
-
-
-	else :
-		#ret = {'Margharita':str(pizzaIngredients)}
-		ret = {'pizza_name':"Margharita", 'add':listPizza} 
-	return ret
+    listPizza = inPizza.get_ingredients()
+    pizzaIngredients = set(listPizza)
+    lenPizza = len(pizzaIngredients)
+    resultQuad = []
+    correctIngr = {}
+    extraIngr = {}
+    stillMissing = {}
+    for k in pizzas:
+        tmpSet = set(pizzas.get(k))
+        lenTmp = len(tmpSet)
+        correctIngr = pizzaIngredients.intersection(tmpSet)
+        stillMissing = pizzaIngredients.difference(tmpSet)
+        extraIngr = tmpSet.difference(pizzaIngredients)
+        resultQuad.append((len(correctIngr)*correctPoints+len(extraIngr)*extraIngPoints+len(stillMissing)*needsPoints, k, extraIngr, stillMissing))
+    resultQuad.sort(reverse=True)
+    if resultQuad[0][0] > 0 :
+        ret = {'pizza_name':resultQuad[0][1]}
+        if len(resultQuad[0][2]) != 0 :
+            ret['remove'] = list(resultQuad[0][2])
+        if len(resultQuad[0][3]) != 0 :
+            ret['add'] = list(resultQuad[0][3])
+    else :
+        #ret = {'Margharita':str(pizzaIngredients)}
+        ret = {'pizza_name':"Margharita", 'add':listPizza}
+    return ret
