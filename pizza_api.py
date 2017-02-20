@@ -6,19 +6,40 @@ app = Flask(__name__)
 
 # Render a Pizza python object as a json-formatted string
 def json_pizza(pizza):
+    clos = pizza.get_closest()
     ret = {
         "name": pizza.name,
-        "ingredients": pizza.get_ingredients()
+        "ingredients": pizza.get_ingredients(),
+        "closest": {
+            "name": clos.name,
+            "ingredients": clos.get_ingredients(),
+            "added": clos.get_added(),
+            "removed": clos.get_removed()
+        }
     }
-    ret.update(findClosestPizza(pizza))
     return json.dumps(ret)
-# Render a Pizza python object as a html-formatted string
-def html_pizza(pizza):
-    ret = "<h1>Name: " + pizza.name + "</h1>"
-    ret += "<ul>"
-    for i in pizza.get_ingredients():
+
+def print_list(l):
+    if l is None:
+        return "nothing"
+    ret = "<ul>"
+    for i in l:
         ret += "<li>" + i + "</li>"
     ret += "</ul>"
+    return ret
+
+# Render a Pizza python object as a html-formatted string
+def html_pizza(pizza):
+    clos = pizza.get_closest()
+    ret = "<h1>Name: " + pizza.name + "</h1>"
+    ret += "<ul>"
+    ret += print_list(pizza.get_ingredients())
+    ret += "</ul>"
+    ret += "<h1>How to order</h1>"
+    ret += "<h2>Ask for: " + pizza.closest.name + "</h2>"
+    ret += "<h3>It contains</h3>" + print_list(clos.get_ingredients())
+    ret += "<h3>Add</h3>" + print_list(clos.get_added())
+    ret += "<h3>Remove</h3>" + print_list(clos.get_removed())
     return ret
 
 @app.route("/")

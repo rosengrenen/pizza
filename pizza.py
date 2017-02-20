@@ -12,11 +12,40 @@ class Pizza:
     def __init__(self, name):
         self.name = name
 
-    def set_ingredents(self, ingredients):
+    def set_ingredients(self, ingredients):
         self.ingredients = ingredients
 
     def get_ingredients(self):
-        return self.ingredients
+        if hasattr(self,"ingredients"):
+            return self.ingredients
+        else:
+            return None
+
+    def set_closest(self, closest):
+        self.closest = closest
+
+    def get_closest(self):
+        return self.closest
+
+class PizzaModifier(Pizza):
+    def set_added(self, added):
+        self.added = added
+
+    def get_added(self):
+        if hasattr(self,"added"):
+            return self.added
+        else:
+            return None
+
+    def set_removed(self, removed):
+        self.removed = removed
+
+    def get_removed(self):
+        if hasattr(self,"removed"):
+            return self.removed
+        else:
+            return None
+
 
 # Picks an element at random from 'possibilities' and add it to 'picked'. Keep 
 # trying to pick until an item that isn't already in picked appears, thereby
@@ -70,7 +99,9 @@ def random_pizza(args=[], min_ingred=2, max_ingred=6):
     for i in range(0, sauces_nbr):
         pickFrom(sauces, roulette_result)
 
-    ret.set_ingredents(roulette_result)
+    ret.set_ingredients(roulette_result)
+
+    ret.set_closest(findClosestPizza(ret))
 
     return ret
 
@@ -83,20 +114,24 @@ def findClosestPizza(inPizza):
     extraIngr = {}
     stillMissing = {}
     for k in pizzas:
-        tmpSet = set(pizzas.get(k))
-        lenTmp = len(tmpSet)
-        correctIngr = pizzaIngredients.intersection(tmpSet)
-        stillMissing = pizzaIngredients.difference(tmpSet)
-        extraIngr = tmpSet.difference(pizzaIngredients)
-        resultQuad.append((len(correctIngr)*correctPoints+len(extraIngr)*extraIngPoints+len(stillMissing)*needsPoints, k, extraIngr, stillMissing))
+        ingr = set(pizzas.get(k))
+        lenTmp = len(ingr)
+        correctIngr = pizzaIngredients.intersection(ingr)
+        stillMissing = pizzaIngredients.difference(ingr)
+        extraIngr = ingr.difference(pizzaIngredients)
+        resultQuad.append((len(correctIngr)*correctPoints+len(extraIngr)*extraIngPoints+len(stillMissing)*needsPoints, k, ingr, extraIngr, stillMissing))
     resultQuad.sort(reverse=True)
     if resultQuad[0][0] > 0 :
-        ret = {'pizza_name':resultQuad[0][1]}
+        # ret = {'pizza_name':resultQuad[0][1]}
+        ret = PizzaModifier(resultQuad[0][1])
         if len(resultQuad[0][2]) != 0 :
-            ret['remove'] = list(resultQuad[0][2])
+            ret.set_ingredients(list(resultQuad[0][2]))
         if len(resultQuad[0][3]) != 0 :
-            ret['add'] = list(resultQuad[0][3])
+            ret.set_removed(list(resultQuad[0][3]))
+        if len(resultQuad[0][4]) != 0 :
+            ret.set_added(list(resultQuad[0][4]))
     else :
         #ret = {'Margharita':str(pizzaIngredients)}
-        ret = {'pizza_name':"Margharita", 'add':listPizza}
+        ret = PizzaModifier("Margharita")
+        ret.set_added(listPizza)
     return ret
