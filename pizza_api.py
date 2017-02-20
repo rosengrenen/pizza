@@ -20,8 +20,6 @@ def json_pizza(pizza):
     return json.dumps(ret)
 
 def print_list(l):
-    if l is None:
-        return "nothing"
     ret = "<ul>"
     for i in l:
         ret += "<li>" + i + "</li>"
@@ -37,9 +35,12 @@ def html_pizza(pizza):
     ret += "</ul>"
     ret += "<h1>How to order</h1>"
     ret += "<h2>Ask for: " + pizza.closest.name + "</h2>"
-    ret += "<h3>It contains</h3>" + print_list(clos.get_ingredients())
-    ret += "<h3>Add</h3>" + print_list(clos.get_added())
-    ret += "<h3>Remove</h3>" + print_list(clos.get_removed())
+    if clos.get_ingredients() is not None:
+        ret += "<h3>It contains</h3>" + print_list(clos.get_ingredients())
+    if clos.get_added() is not None:
+        ret += "<h3>Add</h3>" + print_list(clos.get_added())
+    if clos.get_removed() is not None:
+        ret += "<h3>Remove</h3>" + print_list(clos.get_removed())
     return ret
 
 @app.route("/")
