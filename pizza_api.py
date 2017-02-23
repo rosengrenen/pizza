@@ -63,5 +63,9 @@ def meat_pizza():
     pizza = random_pizza(["meat"])
     return json_pizza(pizza)
 
+@app.route("/maintainers")
+def maintainers():
+    return "Frontend Heroes/IO"
+
 if __name__ == "__main__":
     app.run()
