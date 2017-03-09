@@ -5,7 +5,7 @@ pizzas = {'margherita':[], 'prosciutto':['skinka'], 'funghi':['champinjoner'], '
 'salami':['salami','champinjoner','feferoni','lök'],'napoli':['champinjoner','vitlök','oliver','fetaost','lök'],'caruso':['skinka','köttfärs','bearnaisesås'],'quattro stagione':['skinka','räkor','champinjoner','kronärtskocka'],
 'orientale':['skinka','köttfärs','lök'],'frutti':['banan','ananas','jordnötter','curry'],'bahamas':['skinka','ananas','champinjoner'],'kung':['lök','skinka','bacon','ägg'],
 'azteka':['skinka','jalapeño','taco kryddmix','tacosås'],'acapulco':['oxfilé','champinjoner','jalapeño','taco kryddmix','färsk vitlök', 'lök', 'tacosås'], 'valentino':['champinjoner','kronärtskocka','oliver','vitlök','färska tomater','paprika','feferoni'],
-'ravena':['kyckling','bacon','ananas','jordnötter','curry'], 'reale':['oxfilé','ägg','bearnaisesås'],'afrikana':['oxfilé','banan','ananas','jordnötter','curry'],
+'ravena':['kyckling','banan','ananas','jordnötter','curry'], 'reale':['oxfilé','ägg','bearnaisesås'],'afrikana':['oxfilé','banan','ananas','jordnötter','curry'],
 'sessan':['skinka','oxfilé','bearnaisesås'], 'mafioso':['oxfilé','vitlök','färska tomater','lök','bearnaisesås'], 'da vinci':['oxfilé','vitlök','feferoni','fetaost','lök'],
 'rhodos':['kebabkött','feferoni','fetaost','lök','kebabsås mild'],'polo':['skinka','oxfilé','köttfärs','vitlök'],'gorgonzola special':['oxfilé','champinjoner','färska tomater','gorgonzolaost'],
 'ascoli':['skinka','kebabkött','bacon','champinjoner','lök','kebabsås mild'],'konya':['oxfilé','champinjoner','vitlök','gorgonzolaost','bearnaisesås'],
