@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from pizza import random_pizza, findClosestPizza
 import sys
@@ -13,3 +13,4 @@ for i in pizza.get_ingredients():
     print(i)
 
 print(instruktioner)
+
